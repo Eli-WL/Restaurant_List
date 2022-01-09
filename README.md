@@ -1,47 +1,62 @@
-我的餐廳清單
+# 我的餐廳清單
 
-Features
-Check all restaurants including location and information.
+![Index page about Restaurant List](./public/Image/index.jpg)
 
-Use keyword to search restaurant.
+## 介紹
 
-Getting Start
-Environment Setup
-Node.js v14.16.0
+查詢&確認自己的餐廳清單，可以瀏覽餐廳、查看詳細資訊。
 
-Installing
-Check requirement for environment setup.
+### 功能
 
-Open your terminal and use 'git clone' to copy this project to local.
+- 查看所有餐廳
+- 瀏覽餐廳的詳細資訊
+- 搜尋特定餐廳
 
-git clone https://github.com/winnielinn/restaurant-list.git
-3.Change directory to the project.
+## 開始使用
 
-cd restaurant-list
-4.Install all dependencies.
+1. 將專案 clone 到本地
 
-npm install
-5.Install nodemon package.
+   ```bash
+   git clone https://github.com/Eli-WL/Restaurant_List.git
+   ```
 
-npm install -g nodemon 
-6.Run server in localhost using following npm script.
+2. 在本地開啟之後，透過終端機進入資料夾，輸入：
 
-npm run dev
-7.If successful, Server start! http://localhost:3000 will show in your terminal and you could open this URL to use web app.
+   ```bash
+   npm install
+   ```
 
-8.Stop running.
+3. 確認express-handlebars 為5.3.4以下的版本，若不是輸入以下指令安裝
 
-ctrl + c
-Devtools
-Node.js 14.16.0
+   ```bash
+   npm i express-handkebars @ 5.3.4
+   ```
 
-Express 4.12.7
 
-Express-Handlebars 3.0.0
+4. 確認環境與下列開發環境相同後，輸入：
 
-Bootstrap 4.3.1
+   ```bash
+   npm run dev
+   ```
 
-Font-awesome 5.8.1
+5. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
 
-Contributor
+   ```bash
+   Listening on http://localhost:3000
+   ```
+
+6. 停止server運作
+
+   ```bash
+   ctrl + c
+   ```
+
+## 開發工具
+
+- Node.js 14.16.0
+- Express 4.17.1
+- Express-Handlebars 5.3.4
+
+
+## Contributor
 Eli Lin
