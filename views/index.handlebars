@@ -28,7 +28,7 @@
           <div class="card-body p-3">
             <h6 class="card-title mb-1">{{ this.name }}</h6>
             <div class="restaurant-category mb-1">
-              <i class="fas fa-utensils pr-2"></i> {{ this.category }}
+              <i class="fas fa-utensils"></i> {{ this.category }}
             </div>
             <span class="badge badge-pill badge-danger font-weight-normal">
               {{ this.rating }}
@@ -36,9 +36,9 @@
             </span>
           </div>
           <div class="card-footer d-flex justify-content-end">
-            <a class="mr-1" href="/restaurants/{{ this.id }}/edit">Edit</a>
-            <a class="mr-1" href="/restaurants/{{ this.id }}" class="text-secondary">Detail</a>
-            <a href="/restaurants/{{ this.id }}/delete">Delete</a>
+            <a class="mr-1 btn btn-major" href="/restaurants/{{ this.id }}/edit">Edit</a>
+            <a class="mr-1 btn btn-info" href="/restaurants/{{ this.id }}" class="text-secondary">Detail</a>
+            <a class="btn btn-danger" href="/restaurants/{{ this.id }}/delete">Delete</a>
           </div>
         </div>
 
