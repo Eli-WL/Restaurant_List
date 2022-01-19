@@ -31,8 +31,14 @@ app.get('/search', (req, res) => {
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurant })
+  res.render('detail', { restaurant: restaurant })
 })
+
+app.get('/restaurants/:restaurant_id/edit', (req, res) => {
+  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
+  res.render('edit', { restaurant: restaurant })
+})
+
 
 // Start and listen the server
 app.listen(port, () => {
