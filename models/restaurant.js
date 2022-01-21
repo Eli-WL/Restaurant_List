@@ -6,32 +6,36 @@ const restaurantSchema = new Schema({
     required: true // 這是個必填欄位
   },
   name_en: {
-    type: String, // 資料型別是字串
-    required: true // 這是個必填欄位
+    type: String,
+    required: true
   },
   category: {
-    type: String, // 資料型別是字串
-    required: true // 這是個必填欄位
+    type: String,
+    required: true
   },
   image: {
     type: String,
+    required: true
   },
   location: {
-    type: String, // 資料型別是字串
-    required: true // 這是個必填欄位
+    type: String,
+    required: true
   },
   phone: {
-    type: String, // 資料型別是字串
-    required: true // 這是個必填欄位
+    type: String,
+    required: true
   },
   google_map: {
     type: String,
+    required: true
   },
   rating: {
-    type: Double,
+    type: Number,
+    required: true
   },
   description: {
-    type: String, // 資料型別是字串
+    type: String,
+    required: true
   },
 })
 module.exports = mongoose.model('Restaurant', restaurantSchema)
