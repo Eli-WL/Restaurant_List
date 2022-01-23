@@ -39,7 +39,7 @@
             <i class="fas fa-map-marker-alt"></i>
             餐廳地址：
           </label>
-          <input type="text" class="form-control" id="restaurant-loaction" placeholder="loaction" name="loaction"
+          <input type="text" class="form-control" id="restaurant-location" placeholder="location" name="location"
             value="{{restaurant.location}}">
         </p>
 
@@ -52,15 +52,6 @@
             value="{{restaurant.phone}}">
         </p>
 
-        <p class="mb-5">
-          <label for="restaurant-description" class="form-label">
-            <i class="fas fa-file-alt"></i>
-            餐廳描述：
-          </label>
-          <textarea class="form-control" name="description" id="restaurant-description" cols="80"
-            rows="5">{{restaurant.description}}</textarea>
-        </p>
-
         <p class="mb-1">
           <label for="restaurant-image" class="form-label">
             <i class="fas fa-image"></i>
@@ -69,10 +60,20 @@
           <input type="text" class="form-control" id="restaurant-image" placeholder="image" name="image"
             value="{{restaurant.image}}">
         </p>
-        <div>
+
+        {{!-- <div>
           <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
             style="max-width: 600px;">
-        </div>
+        </div> --}}
+
+        <p class="mb-5">
+          <label for="restaurant-description" class="form-label">
+            <i class="fas fa-file-alt"></i>
+            餐廳描述：
+          </label>
+          <textarea class="form-control" name="description" id="restaurant-description" placeholder="description"
+            cols="80" rows="5">{{restaurant.description}}</textarea>
+        </p>
 
         <button class="btn btn-success">Save</button>
       </div>

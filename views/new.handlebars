@@ -1,4 +1,71 @@
-<form action="/reataurants" method="POST">
-  <input type="text" placeholder="name" name="name">
-  <button type="submit">Create</button>
+<form action="/restaurants" method="POST">
+  <h1 class="mb-1 restaurant-show-title">
+    <input type="text" placeholder="name" name="name" value="新增餐廳" disabled>
+  </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-10 mx-auto">
+
+        <p class="mb-1">
+          <label for="restaurant-name" class="form-label">
+            <i class="fas fa-utensils"></i>
+            餐廳名稱：
+            </lable>
+            <input type="text" class="form-control" id="restaurant-name" placeholder="name" name="name">
+        </p>
+
+
+        <p class="mb-1">
+          <label for="restaurant-category" class="form-label">
+            <i class="fas fa-utensils"></i>
+            餐廳類別：
+            </lable>
+            <input type="text" class="form-control" id="restaurant-category" placeholder="category" name="category">
+        </p>
+
+        <p class="mb-1">
+          <label for="restaurant-rating" class="form-label">
+            <i class="fas fa-star fa-xs"></i>
+            餐廳評價：
+            </lable>
+            <input type="text" class="form-control" id="restaurant-rating" placeholder="rating" name="rating">
+        </p>
+
+        <p class="mb-1">
+          <label for="restaurant-location" class="form-label">
+            <i class="fas fa-map-marker-alt"></i>
+            餐廳地址：
+          </label>
+          <input type="text" class="form-control" id="restaurant-location" placeholder="location" name="location">
+        </p>
+
+        <p class="mb-1">
+          <label for="restaurant-phone" class="form-label">
+            <i class="fas fa-mobile-alt"></i>
+            餐廳電話：
+          </label>
+          <input type="text" class="form-control" id="restaurant-phone" placeholder="phone" name="phone">
+        </p>
+
+        <p class="mb-1">
+          <label for="restaurant-image" class="form-label">
+            <i class="fas fa-image"></i>
+            圖片網址：
+          </label>
+          <input type="text" class="form-control" id="restaurant-image" placeholder="image" name="image">
+        </p>
+
+        <p class="mb-5">
+          <label for="restaurant-description" class="form-label">
+            <i class="fas fa-file-alt"></i>
+            餐廳描述：
+          </label>
+          <textarea class="form-control" name="description" id="restaurant-description" placeholder="description"
+            cols="80" rows="5"></textarea>
+        </p>
+
+        <button class="btn btn-success">Create</button>
+      </div>
+    </div>
+  </div>
 </form>

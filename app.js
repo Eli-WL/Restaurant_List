@@ -62,8 +62,12 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 app.post('/restaurants', (req, res) => {
-  const name = req.body.name       // 從 req.body 拿出表單裡的 name 資料
-  return Restaurant.create({ name })     // 存入資料庫
+  const id = req.params.id
+  const { name, category, image, location, phone, rating, description } = req.body // 從 req.body 拿出表單裡的資料
+  const google_map = `https://www.google.com.tw/maps/place/${location}`
+  const show = req.body
+  console.log(show)
+  return Restaurant.create({ name, category, image, location, phone, google_map, rating, description })     // 存入資料庫
     .then(() => res.redirect('/')) // 新增完成後導回首頁
     .catch(error => console.log(error))
 })
@@ -87,6 +91,8 @@ app.get('/restaurants/:id/edit', (req, res) => {
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   const { name, category, image, location, phone, rating, description } = req.body
+  const show = req.body
+  console.log(show)
   return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = name
