@@ -3,9 +3,11 @@
 const express = require('express') //載入express
 const app = express() //將載入的express套件存在app裡
 const port = 3000 //定義通訊埠
-
+const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')// require express-handlebars here
-const restaurantList = require(`./restaurant.json`)//將資料夾內的json檔案賦值在List
+// const restaurantList = require(`./restaurant.json`)//將資料夾內的json檔案賦值在List
+const Restaurant = require(`./models/restaurant`)//將資料夾內的json檔案賦值在List
+
 
 const mongoose = require('mongoose') // 載入 mongoose
 mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
@@ -30,29 +32,56 @@ app.set('view engine', 'handlebars')
 // setting static files
 app.use(express.static('public')) //定義如果要找到static檔案時先去找public
 
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // Handle request and response here
+// app.get('/', (req, res) => {
+//   //res.send(`This is my first Express Web App`) 在啟用handlebars之前
+//   // res.render('index') //使用handlebars後將渲染內容交由index處理
+//   res.render('index', { restaurants: restaurantList.results }) //index後方表示從哪個資料取得資料
+// })
+
 app.get('/', (req, res) => {
-  //res.send(`This is my first Express Web App`) 在啟用handlebars之前
-  // res.render('index') //使用handlebars後將渲染內容交由index處理
-  res.render('index', { restaurants: restaurantList.results }) //index後方表示從哪個資料取得資料
+  Restaurant.find() // 取出 restaurant model 裡的所有資料
+    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
+    .catch(error => console.error(error)) // 錯誤處理
 })
+
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
-  const restaurants = restaurantList.results.filter((item) => {
+  const restaurants = Restaurant.filter((item) => {
     return item.name.toLowerCase().includes(keyword) || item.category.includes(keyword)
   })
   res.render('index', { restaurants: restaurants, keyword: keyword })
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('detail', { restaurant: restaurant })
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
 })
 
-app.post('/restaurants/:restaurant_id/edit', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('edit', { restaurant: restaurant })
+app.post('/restaurants', (req, res) => {
+  const name = req.body.name       // 從 req.body 拿出表單裡的 name 資料
+  return Restaurant.create({ name })     // 存入資料庫
+    .then(() => res.redirect('/')) // 新增完成後導回首頁
+    .catch(error => console.log(error))
+})
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('detail', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = res.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
 })
 
 // app.post('/todos/:id/delete', (req, res) => {
