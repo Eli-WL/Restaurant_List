@@ -11,7 +11,7 @@ const methodOverride = require("method-override")
 
 const routes = require('./routes')
 
-require('./config/mongoose')
+require('./models/config/mongoose')
 
 
 // setting template engine

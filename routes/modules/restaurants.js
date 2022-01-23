@@ -38,10 +38,11 @@ router.put('/:id', (req, res) => {
   const show = req.body
   console.log(show)
   const id = req.params.id
-  const { name, category, image, location, phone, rating, description } = req.body
+  const { name, name_en, category, image, location, phone, rating, description } = req.body
   return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = name
+      restaurant.name_en = name_en
       restaurant.category = category
       restaurant.image = image
       restaurant.location = location

@@ -1,4 +1,4 @@
-const db = require('../../config/mongoose')
+const db = require('../config/mongoose')
 const Restaurant = require('../restaurant')
 const restaurantList = require('../../restaurant.json').results
 
