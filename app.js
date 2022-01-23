@@ -91,8 +91,6 @@ app.get('/restaurants/:id/edit', (req, res) => {
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   const { name, category, image, location, phone, rating, description } = req.body
-  const show = req.body
-  console.log(show)
   return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = name
@@ -109,13 +107,13 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// app.post('/todos/:id/delete', (req, res) => {
-//   const id = req.params.id
-//   return Todo.findById(id)
-//     .then(todo => todo.remove())
-//     .then(() => res.redirect('/'))
-//     .catch(error => console.log(error))
-// })
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 // Start and listen the server
 app.listen(port, () => {
