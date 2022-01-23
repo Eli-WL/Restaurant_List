@@ -3,11 +3,10 @@
 const express = require('express') //載入express
 const app = express() //將載入的express套件存在app裡
 const port = 3000 //定義通訊埠
-const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')// require express-handlebars here
 // const restaurantList = require(`./restaurant.json`)//將資料夾內的json檔案賦值在List
 const Restaurant = require(`./models/restaurant`)//將資料夾內的json檔案賦值在List
-
+const methodOverride = require("method-override")
 
 const mongoose = require('mongoose') // 載入 mongoose
 mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
@@ -31,31 +30,30 @@ app.set('view engine', 'handlebars')
 
 // setting static files
 app.use(express.static('public')) //定義如果要找到static檔案時先去找public
-
-app.use(bodyParser.urlencoded({ extended: true }))
-
-// Handle request and response here
-// app.get('/', (req, res) => {
-//   //res.send(`This is my first Express Web App`) 在啟用handlebars之前
-//   // res.render('index') //使用handlebars後將渲染內容交由index處理
-//   res.render('index', { restaurants: restaurantList.results }) //index後方表示從哪個資料取得資料
-// })
+app.use(methodOverride("_method"))
 
 app.get('/', (req, res) => {
   Restaurant.find() // 取出 restaurant model 裡的所有資料
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
     .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
-    .catch(error => console.error(error)) // 錯誤處理
+    .catch(error => console.log(error)) // 錯誤處理
 })
-
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
-  const restaurants = Restaurant.filter((item) => {
-    return item.name.toLowerCase().includes(keyword) || item.category.includes(keyword)
-  })
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      const result = restaurants.filter((item) => {
+        return item.name.toLowerCase().includes(keyword) || item.category.includes(keyword)
+      })
+      // console.log(result, keyword)
+      res.render('index', { restaurants: result, keyword: keyword })
+    })
+    .catch(error => console.log(error))
+
 })
+
 
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
