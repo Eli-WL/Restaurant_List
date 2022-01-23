@@ -7,7 +7,7 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })
 
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
   const id = req.params.id
   const { name, category, image, location, phone, rating, description } = req.body // 從 req.body 拿出表單裡的資料
   const google_map = `https://www.google.com.tw/maps/place/${location}`
@@ -35,6 +35,8 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+  const show = req.body
+  console.log(show)
   const id = req.params.id
   const { name, category, image, location, phone, rating, description } = req.body
   return Restaurant.findById(id)

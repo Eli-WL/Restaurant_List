@@ -12,4 +12,18 @@ router.get('/', (req, res) => {
     .catch(error => console.log(error)) // 錯誤處理
 })
 
+router.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase()
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      const result = restaurants.filter((item) => {
+        return item.name.toLowerCase().includes(keyword) || item.category.includes(keyword)
+      })
+      // console.log(result, keyword)
+      res.render('index', { restaurants: result, keyword: keyword })
+    })
+    .catch(error => console.log(error))
+})
+
 module.exports = router
